@@ -10,12 +10,19 @@ let graphMaxLabel;
 let graphMinLabel;
 let groundGraphics;
 
+function preload() {
+  this.load.image("player", "assets/player.png");
+  this.load.image("building", "assets/building.png");
+}
+
 const config = {
   type: Phaser.AUTO,
   width: 800,
   height: 600,
   backgroundColor: "#2d2d2d",
-  scene: {
+  pixelArt: true,
+  scene: {  
+    preload: preload,
     create: create,
     update: update
   }
@@ -36,10 +43,13 @@ function create() {
     groundGraphics.strokeRect(2,2,796,596);
 
   // Create a simple colored square as our placeholder player
-  player = this.add.rectangle(400, 300, 32, 32, 0x00ff00);
+    player = this.add.image(400, 300, "player");
+  player.setScale(2);
 
-  building = this.add.rectangle(600, 200, 100, 100, 0x3366ff);
-  building2 = this.add.rectangle(150,450,100,100,0xff9933);
+   building = this.add.image(600, 200, "building");
+  building.setScale(6);
+    building2 = this.add.image(150, 450, "building");
+  building2.setScale(6);
 
   // Set up arrow key detection
   cursors = this.input.keyboard.createCursorKeys();
